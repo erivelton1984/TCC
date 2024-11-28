@@ -8,14 +8,14 @@ class Program
         var repository = new AlunoRepository();
         var cursoRepository = new CursoRepository();
         var salaRepository = new SalaRepository();
-
+ 
         while (true)
         {
             Console.Write("Escolha uma opção: ");
             Console.WriteLine("\n===== Menu =====");
-            Console.WriteLine("1. Cadastrar Aluno");
-            Console.WriteLine("2. Cadastrar Curso");
-            Console.WriteLine("3. Cadastrar Sala");
+            Console.WriteLine("1. Aluno");
+            Console.WriteLine("2. Curso");
+            Console.WriteLine("3. Sala");
             Console.WriteLine("0. Sair");
             var opcao = Console.ReadLine();
 
@@ -112,7 +112,7 @@ class Program
                                 Console.Write("Digite o nome do Curso: ");
                                 var nomeCurso = Console.ReadLine();
 
-                                Console.Write("Digite o número o horário do Curso: ");
+                                Console.Write("Digite o horário do Curso: ");
                                 var horarioCurso = Console.ReadLine();
 
                                 cursoRepository.InserirCurso(new Curso { nomeCurso = nomeCurso, horarioCurso = horarioCurso });
@@ -147,10 +147,10 @@ class Program
 
                             case "4":
 
-                                Console.Write("Digite o nome do aluno para excluir: ");
+                                Console.Write("Digite o nome curso para excluir: ");
                                 var nomeExcluir = Console.ReadLine();
                                 cursoRepository.ExcluirCurso(nomeExcluir);
-                                Console.WriteLine("Aluno excluído com sucesso!");
+                                Console.WriteLine("Curso excluído com sucesso!");
                                 break;
 
                             case "0":
@@ -186,11 +186,11 @@ class Program
                                 Console.Write("Digite o número da sala: ");
                                 var numeroSala = Console.ReadLine();
 
-                                Console.WriteLine("\n ===== Escolha uma sala ===== ");
+                                Console.WriteLine("\n ===== Escolha uma curso ===== ");
                                 var cursos = cursoRepository.ObterTodosCursos();
                                 foreach (var curso in cursos)
                                 {
-                                    Console.WriteLine($"Id: {curso.id}, nome: {curso.nomeCurso}, Número: {curso.horarioCurso}");
+                                    Console.WriteLine($"Id: {curso.id}, nome: {curso.nomeCurso}, Horário: {curso.horarioCurso}");
                                 }
 
                                 Console.Write("Digite o id do curso: ");
@@ -229,26 +229,22 @@ class Program
 
                             case "3":
 
-                                Console.Write("Digite o nome do Curso para atualizar: ");
+                                Console.Write("Digite o nome da Sala para atualizar: ");
                                 var nome = Console.ReadLine();
 
                                 Console.Write("Digite o novo nome: ");
                                 var novoNomeCurso = Console.ReadLine();
 
-                                Console.Write("Digite o novo horário do Curso para atualizar: ");
-                                var horario = Console.ReadLine();
-
-
-                                cursoRepository.AtualizarCurso(new Curso { horarioCurso = horario, nomeCurso = novoNomeCurso });
-                                Console.WriteLine("Curso atualizado com sucesso!");
+                                cursoRepository.AtualizarCurso(new Curso { nomeCurso = novoNomeCurso });
+                                Console.WriteLine("Sala atualizada com sucesso!");
                                 break;
 
                             case "4":
 
-                                Console.Write("Digite o nome do aluno para excluir: ");
+                                Console.Write("Digite o nome da Sala para excluir: ");
                                 var nomeExcluir = Console.ReadLine();
                                 cursoRepository.ExcluirCurso(nomeExcluir);
-                                Console.WriteLine("Aluno excluído com sucesso!");
+                                Console.WriteLine("Sala excluída com sucesso!");
                                 break;
 
                             case "0":
