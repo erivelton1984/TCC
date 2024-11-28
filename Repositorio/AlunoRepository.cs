@@ -2,55 +2,56 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
-public class CursoRepository
+public class AlunoRepository
 {
     private string connectionString;
 
-    public CursoRepository()
+    public AlunoRepository()
     {
         connectionString = DatabaseConfig.GetConnectionString();
     }
 
     // Create
-    public void InserirCurso(Curso curso)
+    public void InserirAluno(Aluno aluno)
     {
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "INSERT INTO curso (nomeCurso, horarioCurso) VALUES (@nomeCurso, @horarioCurso)";
+            var query = "INSERT INTO aluno (nome, numero) VALUES (@nome, @numero)";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@nome", curso.NomeCurso);
-                command.Parameters.AddWithValue("@numero", curso.HorarioCurso);
+                command.Parameters.AddWithValue("@nome", aluno.nomeAluno);
+                command.Parameters.AddWithValue("@numero", aluno.numeroAluno);
                 command.ExecuteNonQuery();
             }
         }
     }
 
     // Read
-    public List<Curso> ObterTodosCursos()
+    public List<Aluno> ObterTodosAlunos()
     {
-        var cursos = new List<Curso>();
+        var alunos = new List<Aluno>();
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT nomeCurso, horarioCurso FROM curso";
+            var query = "SELECT id, numero, nome FROM aluno";
             using (var command = new MySqlCommand(query, connection))
             {
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        cursos.Add(new Curso
+                        alunos.Add(new Aluno
                         {
-                            NomeCurso = reader.GetString("nomeCurso"),
-                            HorarioCurso = reader.GetString("HorarioCurso")
+                            id = reader.GetInt32("id"),
+                            nomeAluno = reader.GetString("nome"),
+                            numeroAluno = reader.GetInt32("numero")
                         });
                     }
                 }
             }
         }
-        return cursos;
+        return alunos;
     }
 
     // Update
@@ -62,8 +63,8 @@ public class CursoRepository
             var query = "UPDATE aluno SET nome = @nome WHERE numero = @numero";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@nome", aluno.Nome);
-                command.Parameters.AddWithValue("@numero", aluno.Numero);
+                command.Parameters.AddWithValue("@nome", aluno.nomeAluno);
+                command.Parameters.AddWithValue("@numero", aluno.numeroAluno);
                 command.ExecuteNonQuery();
             }
         }
