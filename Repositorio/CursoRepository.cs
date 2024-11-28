@@ -90,11 +90,10 @@ public class CursoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "UPDATE curso SET nomeCurso= @nomeCurso, horarioCurso= @horarioCurso WHERE nomeCurso = @nomeCurso";
+            var query = "UPDATE curso SET nomeCurso= @nomeCurso WHERE nomeCurso = @nomeCurso";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@nomeCurso", curso.nomeCurso);
-                command.Parameters.AddWithValue("@horarioCurso", curso.horarioCurso);
                 command.ExecuteNonQuery();
             }
         }
