@@ -198,7 +198,7 @@ class Program
 
                                 if (!int.TryParse(idCurso, out int idCursoInt))
                                 {
-                                    Console.WriteLine("O número deve ser um valor numérico.");
+                                    Console.WriteLine("wnhrthnqtnan   numérico.");
                                     break;
                                 }
 
